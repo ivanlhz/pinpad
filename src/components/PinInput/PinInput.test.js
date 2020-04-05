@@ -26,3 +26,13 @@ test('When the input value is the wrong pin code display ERROR', () => {
   const inputElement = getByText(/error/i);
   expect(inputElement).toBeInTheDocument();
 });
+
+test('If there are 3 wrong attempts run onErrorsAttempts method', () => {
+  const errorMock = jest.fn();
+  const { getByText, rerender } = render(<PinInput pin={'1111'} code={'1234'} />);
+  const inputElement = getByText(/error/i);
+  expect(inputElement).toBeInTheDocument();
+  rerender(<PinInput pin={'1111'} code={'2222'} />);
+  rerender(<PinInput pin={'1111'} code={'3333'} onErrorsAttempts={errorMock} />);
+  expect(errorMock).toHaveBeenCalledTimes(1);
+});

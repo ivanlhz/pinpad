@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './styles.scss';
 import PropTypes from 'prop-types';
 
-const PinInput = ({ pin, code }) => {
+const PinInput = ({ pin, code, onErrorsAttempts = () => {} }) => {
   const [output, setOutput] = useState(() => '');
+  const [errorCount, setErrorCount] = useState(1);
 
   useEffect(() => {
     function valueHandler() {
@@ -12,6 +13,7 @@ const PinInput = ({ pin, code }) => {
           setOutput(<span className="error">ERROR</span>);
         } else {
           setOutput(<span className="success">OK</span>);
+          setErrorCount(1);
         }
       } else {
         setOutput(formatOuput());
@@ -30,9 +32,22 @@ const PinInput = ({ pin, code }) => {
         );
       }
     }
-
     valueHandler();
   }, [code, pin]);
+
+  useEffect(() => {
+    function checkError() {
+      if (code.length === 4 && pin !== code) {
+        setErrorCount((current) => current + 1);
+        if (errorCount >= 3) {
+          onErrorsAttempts();
+          setErrorCount(0);
+        }
+      }
+    }
+    checkError();
+    // eslint-disable-next-line
+  }, [pin, code]);
 
   return <div className="output-text">{output}</div>;
 };
@@ -40,6 +55,7 @@ const PinInput = ({ pin, code }) => {
 PinInput.propTypes = {
   pin: PropTypes.string.isRequired,
   code: PropTypes.string,
+  onErrorsAttempts: PropTypes.func,
 };
 
 export default PinInput;
