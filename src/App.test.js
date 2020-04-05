@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('Get the title element', () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const titleElement = getByText(/unlock with your pin code/i);
+  expect(titleElement).toBeInTheDocument();
 });
