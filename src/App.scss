@@ -1,3 +1,21 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .text {
+      font-size: 2rem;
+    }
+    .actions {
+      margin-left: 12px;
+      label {
+        color: #0588d4;
+        font-style: italic;
+      }
+    }
+  }
 }
