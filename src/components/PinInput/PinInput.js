@@ -2,40 +2,44 @@ import React, { useState, useEffect } from 'react';
 import './styles.scss';
 import PropTypes from 'prop-types';
 
-const PinInput = ({ pin, value }) => {
+const PinInput = ({ pin, code }) => {
   const [output, setOutput] = useState(() => '');
 
   useEffect(() => {
-    valueHandler();
-  }, [value]);
-
-  const valueHandler = () => {
-    if (value.length === 4) {
-      if (pin !== value) {
-        setOutput('ERROR');
+    function valueHandler() {
+      if (code.length === 4) {
+        if (pin !== code) {
+          setOutput(<span className="error">ERROR</span>);
+        } else {
+          setOutput(<span className="success">OK</span>);
+        }
       } else {
-        setOutput('OK');
+        setOutput(formatOuput());
       }
-    } else {
-      setOutput(formatOuput());
     }
-  };
-
-  const formatOuput = () => {
-    if (value.length === 1) {
-      return value;
-    } else if (value.length > 0) {
-      let toReturn = new Array(value.length - 1).fill('*');
-      return toReturn.join('') + value[value.length - 1];
+    function formatOuput() {
+      if (code.length === 1) {
+        return <span>{code}</span>;
+      } else if (code.length > 0) {
+        const toReturn = new Array(code.length - 1).fill('*');
+        return (
+          <>
+            {toReturn.join('')}
+            <span>{code[code.length - 1]}</span>
+          </>
+        );
+      }
     }
-  };
 
-  return <div className="input-text">{output}</div>;
+    valueHandler();
+  }, [code, pin]);
+
+  return <div className="output-text">{output}</div>;
 };
 
 PinInput.propTypes = {
   pin: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  code: PropTypes.string,
 };
 
 export default PinInput;

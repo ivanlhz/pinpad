@@ -1,28 +1,28 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import PinInput from './PinInput';
 
 test('When the input value length is 1, it value should be the number', () => {
-  const { getByText } = render(<PinInput pin={'1111'} value={'1'} />);
+  const { getByText } = render(<PinInput pin={'1111'} code={'1'} />);
   expect(getByText('1')).toBeInTheDocument();
 });
 
 test('Input value should be *. But the last character should be a number', () => {
-  const { getByText } = render(<PinInput pin={'1111'} value={'124'} />);
-  const inputElement = getByText(/\*\*4/i);
-
+  const { getByText } = render(<PinInput pin={'1111'} code={'124'} />);
+  const inputElement = getByText(/\*\*/i);
+  const span = getByText(/4/i);
   expect(inputElement).toBeInTheDocument();
+  expect(span).toBeInTheDocument();
 });
 
 test('When the input value is the right pin code display OK', () => {
-  const { getByText } = render(<PinInput pin={'1111'} value={'1111'} />);
+  const { getByText } = render(<PinInput pin={'1111'} code={'1111'} />);
   const inputElement = getByText(/ok/i);
   expect(inputElement).toBeInTheDocument();
 });
 
 test('When the input value is the wrong pin code display ERROR', () => {
-  const { getByText } = render(<PinInput pin={'1111'} value={'1234'} />);
+  const { getByText } = render(<PinInput pin={'1111'} code={'1234'} />);
   const inputElement = getByText(/error/i);
   expect(inputElement).toBeInTheDocument();
 });
