@@ -5,7 +5,6 @@
 This project is about a short programming exercise where I need to create a Pinpad with the instruction provided by email.
 
 ## Steps
-
 In this programming exercise I followed the following steps
 
 ### 1) Layout design
@@ -18,15 +17,15 @@ https://codepen.io/ivanlhz/pen/GRJbmqy?editors=1100
 
 ### 2) Remove the base CRA project components
 
-### 3) Tests
+### 3) Create tests and components
+- 1) Create the PinPad test and then the component
+- 2) Add the PinPad to de App
+- 3) Create the PinInput test and then the component
+- 4) Add the PinInput to de App
+- 5) Add App behavior and final css
+  
+### 4) Components tests, fixes and revision
 
-### 4) Create components
-
-### 5) Components tests checks an revision
-
-### 6) Create the css styles
-
-### 7) Test the final application and make last fixes
 
 ## Available Scripts
 

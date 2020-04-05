@@ -7,6 +7,7 @@ function App() {
   const [number, setNumber] = useState('');
   const [pin] = useState(() => getPin());
   const [showPin, setShowPin] = useState(false);
+  const [disabledPad, setDisabledPad] = useState(false);
 
   const pressHandler = (value) => {
     if (number.length === 4) {
@@ -14,6 +15,11 @@ function App() {
     } else {
       setNumber(number + value.toString());
     }
+  };
+
+  const disablePadHandler = () => {
+    setDisabledPad(true);
+    setTimeout(() => setDisabledPad(false), 30000);
   };
 
   return (
@@ -27,8 +33,8 @@ function App() {
         </div>
       </div>
 
-      <PinInput pin={pin} code={number} />
-      <PinPad onNumberPress={pressHandler} />
+      <PinInput pin={pin} code={number} onErrorsAttempts={disablePadHandler} />
+      <PinPad onNumberPress={pressHandler} disabled={disabledPad} />
     </div>
   );
 }
