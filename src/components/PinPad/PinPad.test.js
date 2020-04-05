@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import PinPad from './PinPad';
 
 test('All numbers should be visible', () => {
-  const { getByText } = render(<PinPad />);
+  const { getByText } = render(<PinPad onNumberPress={() => {}} />);
   for (let i = 0; i < 10; i++) {
     const numberElement = getByText(i.toString());
     expect(numberElement).toBeInTheDocument();
