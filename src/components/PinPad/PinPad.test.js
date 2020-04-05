@@ -19,3 +19,11 @@ test('On number press it should call the onNumbrePress method', () => {
   expect(mockFunction.mock.calls.length).toBe(1);
   expect(mockFunction.mock.calls[0][0]).toBe(3);
 });
+
+test("If is disabled it should'nd fire onNumberPress method", () => {
+  const mockFunction = jest.fn();
+  const { getByText } = render(<PinPad onNumberPress={mockFunction} disabled={true} />);
+  const numberElement = getByText(/3/i);
+  userEvent.click(numberElement);
+  expect(mockFunction.mock.calls.length).toBe(0);
+});

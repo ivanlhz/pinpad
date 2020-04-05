@@ -2,16 +2,19 @@ import React from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
 
-const PinPad = ({ onNumberPress }) => {
+const PinPad = ({ onNumberPress, disabled = false }) => {
   const numbers = new Array(10).fill(null).map((e, index) => ({
     id: Math.random().toString(),
     value: 9 - index,
   }));
+  const getClassName = () => {
+    return `circle ${disabled ? 'disabled' : ''}`;
+  };
 
   return (
     <div className="pin-pad">
       {numbers.map(({ id, value }) => (
-        <div className="circle" key={id} onClick={() => onNumberPress(value)}>
+        <div className={getClassName()} key={id} onClick={() => (!disabled ? onNumberPress(value) : null)}>
           {value}
         </div>
       ))}
@@ -21,6 +24,7 @@ const PinPad = ({ onNumberPress }) => {
 
 PinPad.propTypes = {
   onNumberPress: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };
 
 export default PinPad;

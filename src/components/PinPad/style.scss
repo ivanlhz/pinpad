@@ -27,5 +27,10 @@
     &:last-child {
       grid-column-start: 2;
     }
+    &.disabled {
+      cursor: not-allowed;
+      color: white;
+      background: rgba(124, 155, 249, 0.3);
+    }
   }
 }
