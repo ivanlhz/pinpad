@@ -1,26 +1,14 @@
 import React, { useState } from 'react';
 import './App.scss';
 import { PinPad, PinInput } from './components';
+import { useDisablePad, useNumber } from './customHooks';
 
 function App() {
   const getPin = () => Math.floor(Math.random() * 10000 + 1).toString();
-  const [number, setNumber] = useState('');
   const [pin] = useState(() => getPin());
   const [showPin, setShowPin] = useState(false);
-  const [disabledPad, setDisabledPad] = useState(false);
-
-  const pressHandler = (value) => {
-    if (number.length === 4) {
-      setNumber(value.toString());
-    } else {
-      setNumber(number + value.toString());
-    }
-  };
-
-  const disablePadHandler = () => {
-    setDisabledPad(true);
-    setTimeout(() => setDisabledPad(false), 30000);
-  };
+  const { disabledPad, disablePadHandler } = useDisablePad();
+  const { number, pressHandler } = useNumber();
 
   return (
     <div className="App">
