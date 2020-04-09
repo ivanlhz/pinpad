@@ -32,7 +32,7 @@ Launches the test coverage runner
 
 ### `yarn test:e2e`
 
-Launches the cypress e2e tests
+Run a local server and open a cypress windows where you can run all e2e tests.
 
 ### `yarn build`
 
