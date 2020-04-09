@@ -28,6 +28,12 @@ https://codepen.io/ivanlhz/pen/GRJbmqy?editors=1100
 
 ### 4) Components tests, fixes and revision
 
+This is the final revision of the code, where I do small fixes, some improvements, refactors and do uncoverage tests.
+
+### 5) Add Cypress(e2e testing)
+
+### 6) Add Stroybook(visual documentation about components and it uses)
+
 ## Available Scripts
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
