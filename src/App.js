@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.scss';
 import { PinPad, PinInput, ShowPin } from './components';
-import { useDisablePad, useNumber } from './customHooks';
+import { useDisablePad, useNumber, usePin } from './customHooks';
 
 function App() {
-  const getPin = () => Math.floor(Math.random() * 10000 + 1).toString();
-  const [pin] = useState(() => getPin());
+  const pin = usePin();
   const { disabledPad, disablePadHandler } = useDisablePad();
   const { number, pressHandler } = useNumber();
 
