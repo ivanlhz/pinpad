@@ -8,7 +8,7 @@ const ShowPin = ({ pin, className, style }) => {
     <div className={`actions ${className}`} style={style}>
       <input id="showPin" type="checkbox" onChange={(e) => setShowPin(e.target.checked)} checked={showPin} />
       <label htmlFor="showPin">{`${showPin ? 'Hide' : 'Show'} pin`}</label>
-      {showPin && <> ({pin}) </>}
+      {showPin && <span> {pin} </span>}
     </div>
   );
 };

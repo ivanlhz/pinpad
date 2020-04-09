@@ -14,7 +14,7 @@ const PinPad = ({ onNumberPress, disabled = false }) => {
   return (
     <div className="pin-pad">
       {numbers.map(({ id, value }) => (
-        <div className={getClassName()} key={id} onClick={() => (!disabled ? onNumberPress(value) : null)}>
+        <div data-testid={value} className={getClassName()} key={id} onClick={() => (!disabled ? onNumberPress(value) : null)}>
           {value}
         </div>
       ))}
