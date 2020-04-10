@@ -2,6 +2,10 @@
   "name": "pinpad",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "email": "ivanlhz@gmail.com",
+    "name": "Iván López Hernández"
+  },
   "dependencies": {
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
