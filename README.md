@@ -32,7 +32,11 @@ Launches the test coverage runner
 
 ### `yarn test:e2e`
 
-Run a local server and open a cypress windows where you can run all e2e tests.
+Launches a local server and open a cypress windows where you can run all e2e tests.
+
+### `yarn storybook`
+
+Launches the storybook viewer in order to view the components in a split way.
 
 ### `yarn build`
 
