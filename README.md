@@ -55,16 +55,16 @@ In this programming exercise I followed the following steps
 Use figma in order to create base layout
 https://www.figma.com/file/nEK87apwWqgQcY4k3LvStm/Pin-Code?node-id=0%3A1
 
-Test the base layout of pinpand in codepen
-https://codepen.io/ivanlhz/pen/GRJbmqy?editors=1100
+Test the base layout in codepen
+https://codepen.io/ivanlhz/pen/GRJbmqy
 
-### 2)Create the project with create_react_app and reemove the base CRA project components
+### 2) Create the project with create_react_app and remove the base CRA project components.
 
 ### 3) Create tests and components
 
-- 1. Create the PinPad test and then the component
+- 1. Create the PinPad test and the component
 - 2. Add the PinPad to de App
-- 3. Create the PinInput test and then the component
+- 3. Create the PinInput test and the component
 - 4. Add the PinInput to de App
 - 5. Add App behavior and final css
 
@@ -74,4 +74,5 @@ This is the final revision of the code, where I do small fixes, some improvement
 
 ### 5) Add Cypress(e2e testing)
 
-### 6) Add Stroybook(visual documentation about components and it uses)
+### 6) Add Stroybook
+Add a visual documentation about components and it states
