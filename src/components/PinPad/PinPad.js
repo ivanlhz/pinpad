@@ -1,19 +1,16 @@
 import React from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
+import {generateNumbers} from '../../utils/generators'
 
 const PinPad = ({ onNumberPress, disabled = false }) => {
-  const numbers = new Array(10).fill(null).map((e, index) => ({
-    id: Math.random().toString(),
-    value: 9 - index,
-  }));
   const getClassName = () => {
     return `circle ${disabled ? 'disabled' : ''}`;
   };
 
   return (
     <div className="pin-pad">
-      {numbers.map(({ id, value }) => (
+      {generateNumbers().reverse().map(({ id, value }) => (
         <div data-testid={value} className={getClassName()} key={id} onClick={() => (!disabled ? onNumberPress(value) : null)}>
           {value}
         </div>
