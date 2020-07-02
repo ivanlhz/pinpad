@@ -2,9 +2,14 @@ import { useState } from 'react';
 
 const useDisablePad = (init = false) => {
   const [disabledPad, setDisabledPad] = useState(init);
-  const disablePadHandler = () => {
+  const disablePadHandler = (time) => {
     setDisabledPad(true);
-    setTimeout(() => setDisabledPad(false), 30000);
+    return new Promise(resolve => {
+      setTimeout(() => {
+        setDisabledPad(false)
+        resolve()
+      }, time)
+    })
   };
   return { disabledPad, disablePadHandler };
 };

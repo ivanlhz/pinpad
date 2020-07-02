@@ -1,16 +1,16 @@
 import { useState } from 'react';
 
 const useNumberToString = (init = '', maxLength = 4) => {
-  const [stringNumber, setNumber] = useState(init);
+  const [stringNumber, setStringNumber] = useState(init);
   const pressHandler = (value) => {
     if (stringNumber.length >= maxLength) {
-      setNumber(value.toString());
+      setStringNumber(value.toString());
     } else {
-      setNumber(stringNumber + value.toString());
+      setStringNumber(stringNumber + value.toString());
     }
   };
 
-  return { stringNumber, pressHandler };
+  return { stringNumber, pressHandler, setStringNumber };
 };
 
 export { useNumberToString };

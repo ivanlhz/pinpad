@@ -10,11 +10,14 @@
   user-select: none;
   span {
     color: white;
+    &.warning {
+      color: orange;
+    }
     &.error {
-      color: rgb(180, 69, 69);
+      color: #ff0000;
     }
     &.success {
-      color: green;
+      color: #09ff00;
     }
   }
 }
