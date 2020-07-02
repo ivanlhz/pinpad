@@ -3,16 +3,14 @@ import React, { useEffect, useState } from 'react'
 
 export const useDisplayResults = (userInputCode, pin) => {
   const [output, setOutput] = useState(() => '');
-  const [errorCount, setErrorCount] = useState(1);
 
   useEffect(() => {
     function valueHandler(userInputCode, pin) {
-      if (userInputCode.length === 4) {
+      if (userInputCode.length === pin.length) {
         if (pin !== userInputCode) {
           setOutput(<span className="error">ERROR</span>);
         } else {
           setOutput(<span className="success">OK</span>);
-          setErrorCount(1);
         }
       } else {
         setOutput(formatOuput(userInputCode));
@@ -34,5 +32,5 @@ export const useDisplayResults = (userInputCode, pin) => {
     valueHandler(userInputCode, pin);
   }, [userInputCode, pin]);
 
-  return [output, errorCount, setErrorCount]
+  return output
 }
