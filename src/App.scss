@@ -7,11 +7,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
     .text {
       font-size: 2rem;
     }
   }
   .footer {
+    user-select: none;
     margin-top: 60px;
   }
 }
