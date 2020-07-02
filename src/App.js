@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.scss';
 import { PinPad, PinInput, ShowPin } from './components';
-import { useDisablePad, useNumber, usePin } from './customHooks';
+import { useDisablePad, useNumberToString, usePin } from './customHooks';
 
 function App() {
   const pin = usePin();
   const { disabledPad, disablePadHandler } = useDisablePad();
-  const { number, pressHandler } = useNumber();
+  const { number, pressHandler } = useNumberToString();
 
   return (
     <div className="App">

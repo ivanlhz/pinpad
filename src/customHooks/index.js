@@ -1,3 +1,3 @@
 export { useDisablePad } from './useDisablePad';
-export { useNumber } from './useNumber';
+export { useNumberToString } from './useNumberToString';
 export { usePin } from './usePin';
