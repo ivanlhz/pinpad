@@ -13,7 +13,7 @@ const usePin = (length = 4) => {
     };
 
     setPin(getPin());
-  }, []);
+  }, [length]);
 
   return pin;
 };
