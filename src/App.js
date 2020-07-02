@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.scss';
 import { PinPad, PinInput, ShowPin } from './components';
 import { useDisablePad, useNumberToString, usePin } from './customHooks';
@@ -6,16 +6,22 @@ import { useCheckErrors } from './customHooks/useCheckErrors';
 
 function App() {
   const [pin, setIsNewPin ] = usePin();
-  const [ isLocked, setIsLocked ] = useState(false)
-  const { disabledPad, disablePadHandler } = useDisablePad();
+  const [ disabledPad, disablePadHandler ] = useDisablePad();
   const [ stringNumber, pressHandler, setStringNumber ] = useNumberToString();
-  const [ errorCount, setErrorCount, isRightCode, setIsRightCode ] = useCheckErrors(stringNumber, pin);
+  const [ errorCount, setErrorCount, isRightCode, setIsRightCode, hasNewError, setHasNewError ] = useCheckErrors(stringNumber, pin);
 
   const lockPadAndReset = async () => {
-      setIsLocked(true)
-      await disablePadHandler(300);
-      setIsLocked(false)
+      await disablePadHandler();
       setStringNumber('');
+      setIsNewPin(true);
+  }
+
+  const resetCode = (time = 3000) => {
+    const timer = setTimeout(() => {
+      setStringNumber('');
+      setIsNewPin(true); // Generate new pin
+      clearTimeout(timer); // Prevent to run the timer multiple times
+    }, time)
   }
 
   if (errorCount >= 3) {
@@ -23,14 +29,14 @@ function App() {
     lockPadAndReset();
   }
 
+  if(hasNewError) {
+    setHasNewError(false)
+    resetCode();
+  }
+
   if (isRightCode) {
     setIsRightCode(false);
-    const timer = setTimeout(() => {
-      setStringNumber('');
-      setIsLocked(false);
-      setIsNewPin(true); // Generate new pin
-      clearTimeout(timer); // Prevent to run the timer multiple times
-    }, 3000)
+    resetCode();
   }
 
   return (
@@ -39,7 +45,7 @@ function App() {
         <div className="text">Unlock with your pin code</div>
       </div>
 
-      <PinInput pin={pin} userInputCode={stringNumber} isLocked={isLocked}/>
+      <PinInput pin={pin} userInputCode={stringNumber} isLocked={disabledPad}/>
       <PinPad onNumberPress={pressHandler} disabled={disabledPad} />
       <ShowPin className="footer" pin={pin} />
     </div>
