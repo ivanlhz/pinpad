@@ -1,21 +1,34 @@
 import { useState, useEffect } from 'react';
+import { getPin } from '../service/getPin';
 
 const usePin = (length = 4) => {
+  const [isNewPin, setIsNewPin] = useState(true)
   const [pin, setPin] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
   useEffect(() => {
-    const getPin = () => {
-      const newPin = Math.floor(Math.random() * Math.pow(10, length) + 1).toString();
-      if (newPin.length === length) {
-        return newPin;
-      } else {
-        return newPin.padStart(length, '0');
+    const fetchData = async () => {
+      setIsError(false);
+      setIsLoading(true);
+ 
+      try {
+        const result = await getPin(length);
+        setPin(result);
+      } catch (error) {
+        setIsError(true);
       }
+      setIsNewPin(false);
+      setIsLoading(false);
     };
 
-    setPin(getPin());
-  }, [length]);
+    if (isNewPin && !isLoading) {
+      fetchData()
+    }
 
-  return pin;
+  }, [isNewPin]);
+
+  return [ pin, setIsNewPin, isError ];
 };
 
 export { usePin };
