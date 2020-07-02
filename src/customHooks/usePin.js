@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 
-const usePin = (init = '') => {
-  const [pin, setPin] = useState(init);
+const usePin = (length = 4) => {
+  const [pin, setPin] = useState('');
   useEffect(() => {
     const getPin = () => {
-      const newPin = Math.floor(Math.random() * 10000 + 1).toString();
-      if (newPin.length === 4) {
+      const newPin = Math.floor(Math.random() * Math.pow(10, length) + 1).toString();
+      if (newPin.length === length) {
         return newPin;
       } else {
-        return getPin();
+        return newPin.padStart(length, '0');
       }
     };
 
