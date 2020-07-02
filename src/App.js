@@ -14,7 +14,7 @@ function App() {
         <div className="text">Unlock with your pin code</div>
       </div>
 
-      <PinInput pin={pin} code={stringNumber} onErrorsAttempts={disablePadHandler} />
+      <PinInput pin={pin} userInputCode={stringNumber} onErrorsAttempts={disablePadHandler} />
       <PinPad onNumberPress={pressHandler} disabled={disabledPad} />
       <ShowPin className="footer" pin={pin} />
     </div>
