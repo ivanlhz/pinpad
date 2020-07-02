@@ -6,7 +6,7 @@ import { useDisablePad, useNumberToString, usePin } from './customHooks';
 function App() {
   const pin = usePin();
   const { disabledPad, disablePadHandler } = useDisablePad();
-  const { number, pressHandler } = useNumberToString();
+  const { stringNumber, pressHandler } = useNumberToString();
 
   return (
     <div className="App">
@@ -14,7 +14,7 @@ function App() {
         <div className="text">Unlock with your pin code</div>
       </div>
 
-      <PinInput pin={pin} code={number} onErrorsAttempts={disablePadHandler} />
+      <PinInput pin={pin} code={stringNumber} onErrorsAttempts={disablePadHandler} />
       <PinPad onNumberPress={pressHandler} disabled={disabledPad} />
       <ShowPin className="footer" pin={pin} />
     </div>
