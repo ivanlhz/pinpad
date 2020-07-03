@@ -5,10 +5,10 @@ import { useDisablePad, useNumberToString, usePin } from './customHooks';
 import { useCheckErrors } from './customHooks/useCheckErrors';
 
 function App() {
-  const [pin, setIsNewPin ] = usePin();
-  const [ disabledPad, disablePadHandler ] = useDisablePad();
-  const [ stringNumber, pressHandler, setStringNumber ] = useNumberToString();
-  const [ errorCount, setErrorCount, isRightCode, setIsRightCode, hasNewError, setHasNewError ] = useCheckErrors(stringNumber, pin);
+  const { pin, setIsNewPin } = usePin();
+  const { disabledPad, disablePadHandler } = useDisablePad();
+  const { stringNumber, pressHandler, setStringNumber } = useNumberToString();
+  const { errorCount, setErrorCount, isRightCode, setIsRightCode, hasNewError, setHasNewError } = useCheckErrors(stringNumber, pin);
 
   const lockPadAndReset = async () => {
       await disablePadHandler();

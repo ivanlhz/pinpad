@@ -21,5 +21,5 @@ export const useCheckErrors = (userInputCode, pin) => {
     checkError(userInputCode, pin);
   }, [pin, userInputCode, isRightCode]);
 
-  return [errorCount, setErrorCount, isRightCode, setIsRightCode, hasNewError, setHasNewError]
+  return {errorCount, setErrorCount, isRightCode, setIsRightCode, hasNewError, setHasNewError}
 }

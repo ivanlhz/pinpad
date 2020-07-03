@@ -11,7 +11,7 @@ const useDisablePad = (init = false) => {
       }, 30000)
     })
   };
-  return [ disabledPad, disablePadHandler ];
+  return { disabledPad, disablePadHandler };
 };
 
 export { useDisablePad };

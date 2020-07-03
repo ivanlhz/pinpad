@@ -28,7 +28,7 @@ const usePin = (length = 4) => {
 
   }, [isNewPin]);
 
-  return [ pin, setIsNewPin, isError ];
+  return { pin, setIsNewPin, isError };
 };
 
 export { usePin };

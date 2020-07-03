@@ -10,7 +10,7 @@ const useNumberToString = (init = '', maxLength = 4) => {
     }
   };
 
-  return [ stringNumber, pressHandler, setStringNumber ];
+  return { stringNumber, pressHandler, setStringNumber };
 };
 
 export { useNumberToString };
