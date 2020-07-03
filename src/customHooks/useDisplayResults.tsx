@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export const useDisplayResults = (userInputCode: string, pin: string, isLocked: boolean) => {
+export const useDisplayResults = (userInputCode: string, pin: string, isLocked: boolean = false) => {
   const [output, setOutput] = useState(<></>);
 
   useEffect(() => {

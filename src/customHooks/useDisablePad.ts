@@ -2,17 +2,17 @@ import { useState } from 'react';
 
 type useDisablePadReturns = {
   disabledPad: boolean;
-  disablePadHandler: () => Promise<null>;
+  disablePadHandler: () => Promise<void | undefined>;
 }
 
 const useDisablePad = (init: boolean = false): useDisablePadReturns => {
   const [disabledPad, setDisabledPad] = useState(init);
   const disablePadHandler = () => {
     setDisabledPad(true);
-    return new Promise<null>(resolve => {
+    return new Promise<void | undefined>(resolve => {
       setTimeout(() => {
         setDisabledPad(false)
-        resolve(null)
+        resolve()
       }, 30000)
     })
   };
