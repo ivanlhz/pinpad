@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
-export const useDisplayResults = (userInputCode: string, pin: string, isLocked: boolean = false) => {
+export const useDisplayResults = (userInputCode: string, pin: string, isLocked: boolean = false,displayLockedText: boolean = true) => {
   const [output, setOutput] = useState(<></>);
 
   useEffect(() => {
+    console.log('isLocked, displayLockedText',isLocked, displayLockedText)
     function valueHandler(userInputCode: string, pin: string): void {
-      if (isLocked) {
+      if (isLocked && displayLockedText) {
         setOutput(<span className="warning">LOCKED</span>);
-      } else if (userInputCode.length === pin.length) {
+      } else if (userInputCode.length === pin.length && pin.length > 0) {
         if (pin !== userInputCode) {
           setOutput(<span className="error">ERROR</span>);
         } else {
@@ -35,7 +36,7 @@ export const useDisplayResults = (userInputCode: string, pin: string, isLocked: 
     }
 
     valueHandler(userInputCode, pin);
-  }, [userInputCode, pin, isLocked]);
+  }, [userInputCode, pin, isLocked, displayLockedText]);
 
   return output;
 };

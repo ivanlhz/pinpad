@@ -6,10 +6,11 @@ type PinInputProps = {
   pin: string;
   userInputCode: string;
   isLocked?: boolean;
+  displayLockedText?: boolean;
 }
 
-const PinInput: React.FC<PinInputProps> = ({ pin, userInputCode, isLocked = false}) => {
-  const output: JSX.Element = useDisplayResults(userInputCode, pin, isLocked)
+const PinInput: React.FC<PinInputProps> = ({ pin, userInputCode = '', isLocked = false, displayLockedText = true}) => {
+  const output: JSX.Element = useDisplayResults(userInputCode, pin, isLocked, displayLockedText)
 
   return <div className="output-text">{output}</div>;
 };
