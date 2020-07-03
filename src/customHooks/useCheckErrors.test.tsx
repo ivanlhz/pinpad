@@ -18,4 +18,8 @@ describe('useCheckErrors', () => {
     act(() => result.current.setErrorCount(3))
     expect(result.current.errorCount).toBe(3)
   })
+  test('should increment errorCount', () => {
+    const {result} = renderHook(() => useCheckErrors('1111', '1111'))
+    expect(result.current.hasNewError).toBe(false)
+  })
 })
