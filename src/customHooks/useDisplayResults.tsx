@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-export const useDisplayResults = (userInputCode: string, pin: string, isLocked: boolean = false,displayLockedText: boolean = true) => {
+export const useDisplayResults = (userInputCode: string, 
+  pin: string, isLocked: boolean = false,displayLockedText: boolean = true) => {
   const [output, setOutput] = useState(<></>);
 
   useEffect(() => {
-    console.log('isLocked, displayLockedText',isLocked, displayLockedText)
     function valueHandler(userInputCode: string, pin: string): void {
       if (isLocked && displayLockedText) {
         setOutput(<span className="warning">LOCKED</span>);
