@@ -4,20 +4,20 @@ import { PinPad, PinInput, ShowPin } from './components';
 import { useDisablePad, useNumberToString, usePin } from './customHooks';
 import { useCheckErrors } from './customHooks/useCheckErrors';
 
-function App() {
+const App: React.FC = () => {
   const { pin, setIsNewPin } = usePin();
   const { disabledPad, disablePadHandler } = useDisablePad();
   const { stringNumber, pressHandler, setStringNumber } = useNumberToString();
   const { errorCount, setErrorCount, isRightCode, setIsRightCode, hasNewError, setHasNewError } = useCheckErrors(stringNumber, pin);
 
-  const lockPadAndReset = async () => {
+  const lockPadAndReset = async (): Promise<void> => {
       await disablePadHandler();
       setStringNumber('');
       setIsNewPin(true);
   }
 
-  const resetCode = (time = 3000) => {
-    const timer = setTimeout(() => {
+  const resetCode = (time:number = 3000):void => {
+    const timer: NodeJS.Timeout = setTimeout(() => {
       setStringNumber('');
       setIsNewPin(true); // Generate new pin
       clearTimeout(timer); // Prevent to run the timer multiple times

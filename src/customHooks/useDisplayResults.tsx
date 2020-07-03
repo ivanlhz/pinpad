@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
-
-export const useDisplayResults = (userInputCode, pin, isLocked) => {
-  const [output, setOutput] = useState(() => '');
+export const useDisplayResults = (userInputCode: string, pin: string, isLocked: boolean) => {
+  const [output, setOutput] = useState(<></>);
 
   useEffect(() => {
-    function valueHandler(userInputCode, pin) {
-      if(isLocked) {
+    function valueHandler(userInputCode: string, pin: string): void {
+      if (isLocked) {
         setOutput(<span className="warning">LOCKED</span>);
-      }else if (userInputCode.length === pin.length) {
+      } else if (userInputCode.length === pin.length) {
         if (pin !== userInputCode) {
           setOutput(<span className="error">ERROR</span>);
         } else {
@@ -18,7 +17,8 @@ export const useDisplayResults = (userInputCode, pin, isLocked) => {
         setOutput(formatOuput(userInputCode));
       }
     }
-    function formatOuput(userInputCode) {
+
+    function formatOuput(userInputCode: string): JSX.Element {
       if (userInputCode.length === 1) {
         return <span>{userInputCode}</span>;
       } else if (userInputCode.length > 0) {
@@ -30,9 +30,12 @@ export const useDisplayResults = (userInputCode, pin, isLocked) => {
           </>
         );
       }
+
+      return <></>;
     }
+
     valueHandler(userInputCode, pin);
   }, [userInputCode, pin, isLocked]);
 
-  return output
-}
+  return output;
+};

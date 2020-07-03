@@ -1,6 +1,12 @@
 import React from 'react'
 
-function PinPadNumber({disabled, value, onNumberPress}) {
+type PinPadNumberProps = {
+  disabled: boolean;
+  value: number;
+  onNumberPress: (value: number) => void;
+}
+
+const PinPadNumber: React.FC<PinPadNumberProps> = ({disabled, value, onNumberPress}) => {
   const getClassName = () => {
     return `circle ${disabled ? 'disabled' : ''}`;
   };

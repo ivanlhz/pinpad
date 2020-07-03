@@ -1,14 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { getPin } from '../service/getPin';
 
-const usePin = (length = 4) => {
+type usePinReturns = {
+  pin: string;
+  setIsNewPin: Dispatch<SetStateAction<boolean>>;
+  isError: boolean;
+}
+
+const usePin = (length: number = 4): usePinReturns => {
   const [isNewPin, setIsNewPin] = useState(true)
   const [pin, setPin] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  useEffect(():void => {
+    const fetchData = async (): Promise<void> => {
       setIsError(false);
       setIsLoading(true);
  
