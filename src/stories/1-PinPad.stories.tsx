@@ -9,12 +9,12 @@ export default {
 };
 
 export const defaultState = () => {
-  return <PinPad />;
+  return <PinPad onNumberPress={action('pinPad-click')} />;
 };
 
 export const disabled = () => {
   const disabled = boolean('Disabled', true);
-  return <PinPad disabled={disabled} />;
+  return <PinPad disabled={disabled} onNumberPress={action('pinPad-click')} />;
 };
 
 export const clickEvent = () => {

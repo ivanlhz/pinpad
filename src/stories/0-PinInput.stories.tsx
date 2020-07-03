@@ -8,21 +8,25 @@ export default {
 };
 
 export const defaultState = () => {
-  const pin = text('Pin', '1111');
   const inputCode = text('InputCode', '');
 
-  return <PinInput pin={pin} code={inputCode} />;
+  return <PinInput formState={'notFullFilled'} userInputCode={inputCode} />;
 };
 
 export const success = () => {
-  const pin = text('Pin', '1111');
   const inputCode = text('InputCode', '1111');
 
-  return <PinInput pin={pin} code={inputCode} />;
+  return <PinInput formState={'success'} userInputCode={inputCode} />;
 };
+
 export const error = () => {
-  const pin = text('Pin', '1111');
   const inputCode = text('InputCode', '1112');
 
-  return <PinInput pin={pin} code={inputCode} />;
+  return <PinInput formState={'error'} userInputCode={inputCode} />;
+};
+
+export const locked = () => {
+  const inputCode = text('InputCode', '1112');
+
+  return <PinInput formState={'locked'} userInputCode={inputCode} />;
 };
