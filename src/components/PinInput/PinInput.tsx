@@ -1,18 +1,41 @@
 import React from 'react';
 import './styles.scss';
-import { useDisplayResults } from '../../customHooks/useDisplayResults';
+import { formState } from '../../types/common';
 
 type PinInputProps = {
-  pin: string;
   userInputCode: string;
-  isLocked?: boolean;
-  displayLocked?: boolean;
+  formState: formState;
 }
 
-const PinInput: React.FC<PinInputProps> = ({ pin, userInputCode = '', isLocked = false, displayLocked = true}) => {
-  const output: JSX.Element = useDisplayResults(userInputCode, pin, isLocked, displayLocked)
 
-  return <div className="output-text">{output}</div>;
+const PinInput: React.FC<PinInputProps> = ({ formState, userInputCode = ''}) => {
+
+  const formatOuput = (): JSX.Element => {
+    if (userInputCode.length === 1) {
+      return <span>{userInputCode}</span>;
+    } else if (userInputCode.length > 0) {
+      const toReturn = ''.padStart(userInputCode.length - 1, '*');
+      return (
+        <>
+          {toReturn}
+          <span>{userInputCode[userInputCode.length - 1]}</span>
+        </>
+      );
+    }
+
+    return <></>;
+  }
+  
+  const getOutput = () => {
+    switch(formState) {
+      case 'success':  return <span className="success">OK</span>;
+      case 'error':  return <span className="error">ERROR</span>;
+      case 'locked':  return <span className="warning">LOCKED</span>;
+      default: return formatOuput();
+    }
+  }
+
+  return <div className="output-text">{getOutput()}</div>;
 };
 
 

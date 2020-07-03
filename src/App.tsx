@@ -1,45 +1,70 @@
 import React from 'react';
 import './App.scss';
 import { PinPad, PinInput, ShowPin } from './components';
-import { useDisablePad, useNumberToString, usePin } from './customHooks';
+import { useNumberToString, usePin } from './customHooks';
 import { useCheckErrors } from './customHooks/useCheckErrors';
+import { formState } from './types/common';
 
 const App: React.FC = () => {
-  const [displayLocked, setDisplayLocked] = React.useState(false);
+  const [padState, setPadState] = React.useState<formState>('notFullFilled')
+  const [isShowingMessage, setIsShowingMessage] = React.useState(false)
   const { pin, setIsNewPin } = usePin();
-  const { disabledPad, disablePadHandler } = useDisablePad();
   const { stringNumber, pressHandler, setStringNumber } = useNumberToString();
   const { errorCount, setErrorCount, hasNewError, setHasNewError } = useCheckErrors(stringNumber, pin);
 
-  const lockPadAndReset = async (): Promise<void> => {
-    setDisplayLocked(true);
-    setErrorCount(0);
-    await disablePadHandler(30000);
+  const resetCode = (callback: () => void, time: number = 3000): Promise<void> => {
+    setIsShowingMessage(true);
     setStringNumber('');
-    setIsNewPin(true);
+
+    return new Promise<void>( (resolve) => {
+      setTimeout(() => {
+        callback()
+        resolve();
+      }, time);
+    })
   };
 
-  const resetCode = (time: number = 3000): void => {
-    setDisplayLocked(false);
-    disablePadHandler(time);
+  const NotAreEmpty = (pin: string, stringNumber: string): boolean => {
+    return pin.length > 0 && stringNumber.length > 0
+  }
 
-    const timer: NodeJS.Timeout = setTimeout(() => {
+  const hasEqualLength = (pin: string, stringNumber: string) : boolean => {
+    return pin.length === stringNumber.length
+  }
+
+  const isValid = (pin: string, stringNumber: string): boolean => {
+    return NotAreEmpty(pin, stringNumber) && hasEqualLength(pin, stringNumber) && pin === stringNumber;
+  }
+
+  if (errorCount >= 3 && hasNewError && !isShowingMessage) {
+    setPadState('locked');
+    setHasNewError(false)
+    resetCode(() => {
+      setErrorCount(0);// reset errors
       setIsNewPin(true); // Generate new pin
-      clearTimeout(timer); // Prevent to run the timer multiple times
-    }, time);
-  };
-
-  if (errorCount >= 3) {
-    lockPadAndReset();
+      setIsShowingMessage(false);
+      setPadState('notFullFilled')
+    }, 30000);
   }
 
-  if (hasNewError && errorCount < 3 && errorCount > 0) {
-    setHasNewError(false);
-    resetCode();
+  if (errorCount < 3 && errorCount > 0 && hasNewError && !isShowingMessage) {
+    setHasNewError(false)
+    setPadState('error')
+    resetCode(() => {
+      setIsNewPin(true); // Generate new pin
+      setIsShowingMessage(false);
+      setPadState('notFullFilled')
+    });
   }
 
-  if (pin.length > 0 && stringNumber.length > 0 && pin === stringNumber && pin.length === stringNumber.length) {
-    resetCode();
+  if (isValid(pin, stringNumber) && !isShowingMessage) {
+      setPadState('success')
+      resetCode(() => {
+        setErrorCount(0);// reset errors after success
+        setIsNewPin(true); // Generate new pin
+        setIsShowingMessage(false);
+        setPadState('notFullFilled')
+      })
   }
 
   return (
@@ -48,9 +73,8 @@ const App: React.FC = () => {
         <div className="text">Unlock with your pin code</div>
       </div>
 
-      <PinInput pin={pin} userInputCode={stringNumber} 
-        isLocked={disabledPad} displayLocked={displayLocked} />
-      <PinPad onNumberPress={pressHandler} disabled={disabledPad} />
+      <PinInput userInputCode={stringNumber} formState={padState} />
+      <PinPad onNumberPress={pressHandler} disabled={isShowingMessage} />
       <ShowPin className="footer" pin={pin} />
     </div>
   );
