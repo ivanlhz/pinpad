@@ -1,14 +1,15 @@
-# React PinPad 
+# PinPad 
 
-## Introduction
-
-This project is about a short programming exercise where I need to create a Pinpad with the instruction provided by email.
+## Introduction 👋🏻
+The aim of this project is build a PINPAD application where you need to unlock with the right PINCODE.
+You have 3 attems before Pinpad locks for 30 seconds and change the password.
+In order to guess the right Pincode there's a button where you can see the current code.
 
 ### How to run the project
 In order to run this project, unzip it, enter into the unzipped container folder, open your terminal and go inside the unzipped folder. Install the depdendencies running `npm i` or `yarn install` then you can use the followings scripts. 
 > Note: All scripts can be run using npm
 
-## Available Scripts
+## Available Scripts 👨🏻‍💻
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 In the project directory, you can run:
@@ -46,7 +47,13 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
-## My Steps
+## TODO 📝
+- Add timer 
+- Add top 5 score
+- Top 5 Store score into a firestore or other DB
+- Fix Cypress implementation
+
+## How I did it? 🤔
 
 In this programming exercise I followed the following steps
 
